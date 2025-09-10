@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Review 1</title>
+  <style>
+    body {
+      font-family: 'Times New Roman', serif;
+      margin: 0;
+      padding: 10px 40px 20px 40px;
+      color: #000;
+      position: relative;
+      z-index: 1;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('christbg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -2;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(255, 255, 255, 0.6);
+      z-index: -1;
+    }
+    h2 {
+      font-size: 34px;
+      text-align: center;
+      color: #4b0082;
+      margin: 10px 0 5px;
+    }
+    h3 {
+      font-size: 24px;
+      color: #4b0082;
+      margin: 5px 0 10px;
+    }
+    .review-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+      gap: 30px;
+      margin-bottom: 0;
+    }
+    .main-table {
+      flex: 1;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.85);
+      border: 3px solid black;
+    }
+    .rubric-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.85);
+      border: 3px solid black;
+      margin-top: 10px;
+    }
+    .main-table th,
+    .rubric-table th {
+      border: 2px solid black;
+      text-align: center;
+      font-size: 18px;
+      padding: 12px 14px;
+      background-color: #977298;
+      color: white;
+    }
+    .main-table td,
+    .rubric-table td {
+      border: 2px solid black;
+      text-align: center;
+      font-size: 17px;
+      background-color: #e6ccff;
+      color: black;
+    }
+    .main-table td { padding: 33px 14px; }
+    .rubric-table td { padding: 78px 14px; }
+    .main-table input[type="number"] {
+      width: 85%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #999;
+      background-color: #e6ccff;
+    }
+    .review-image {
+      width: 290px;
+      height: auto;
+      margin-top: 5px;
+    }
+    .submit-btn {
+      display: block;
+      margin: 20px 0 10px auto;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 10px;
+      background-color: #e6ccff;
+      border: 2px solid #888;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #d8b3ff;
+    }
+    .form-fields {
+      margin: 20px 0;
+    }
+    .form-fields label {
+      display: block;
+      font-weight: bold;
+      margin: 10px 0 5px;
+      color: #4b0082;
+      font-size: 18px;
+    }
+    .form-fields input,
+    .form-fields textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #999;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-sizing: border-box;
+    }
+    .form-fields textarea {
+      height: 100px;
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+  <h2>Reviews on the project</h2>
+  <h3>Review 0 (20 marks)</h3>
+
+  <form id="review1EvalForm">
+    <div class="form-fields">
+      <label>Faculty ID:</label>
+      <input type="text" id="faculty_id" placeholder="Enter Faculty ID" required>
+      
+      <label>Student ID:</label>
+      <input type="text" id="student_id" placeholder="Enter Student ID" required>
+      
+      <label>Comments:</label>
+      <textarea id="comments" placeholder="Enter your comments here..."></textarea>
+    </div>
+
+    <div class="review-section">
+      <table class="main-table">
+        <tr>
+          <th>Criteria</th>
+          <th>Marks Awarded</th>
+        </tr>
+        <tr>
+          <td><b>Domain and <br> Problem <br> Identification (20)</b></td>
+          <td><input id="marks" type="number" placeholder="Enter marks" max="20" min="0" required></td>
+        </tr>
+      </table>
+      <img src="review.jpg" alt="Review Image" class="review-image">
+    </div>
+
+    <h3>Evaluation Rubrics</h3>
+    <table class="rubric-table">
+      <tr>
+        <th>Criteria</th>
+        <th>15–20 marks</th>
+        <th>7–14 marks</th>
+        <th>1–6 mark(s)</th>
+      </tr>
+      <tr>
+        <td><b>Domain and <br> Problem <br> Identification (20)</b></td>
+        <td>Very relevant <br> domain with precise <br> problem definition</td>
+        <td>Relevant domain with <br> clear but improvable <br> problem decision</td>
+        <td>Irrelevant domain <br> or ambiguous <br> problem definition</td>
+      </tr>
+    </table>
+
+    <button type="submit" class="submit-btn">Submit Evaluation</button>
+  </form>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('review0EvalForm');
+      
+      form.addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevent default form submission
+
+        // Get form values
+        const faculty_id = document.getElementById('faculty_id').value;
+        const student_id = document.getElementById('student_id').value;
+        const marks = document.getElementById('marks').value;
+        const comments = document.getElementById('comments').value;
+
+        // Create alert message with all details
+        let alertMessage = "Evaluation Updated Successfully!\n\n";
+        alertMessage += "Faculty ID: " + (faculty_id || 'Not provided') + "\n";
+        alertMessage += "Student ID: " + (student_id || 'Not provided') + "\n";
+        alertMessage += "Marks Awarded: " + (marks || 'Not provided') + " out of 20\n";
+        alertMessage += "Comments: " + (comments || 'No comments provided') + "\n\n";
+        
+        // Add performance category based on marks
+        if (marks) {
+          const marksNum = parseInt(marks);
+          if (marksNum >= 15) {
+            alertMessage += "Performance: Excellent (15-20 marks)\n";
+            alertMessage += "Category: Very relevant domain with precise problem definition";
+          } else if (marksNum >= 7) {
+            alertMessage += "Performance: Good (7-14 marks)\n";
+            alertMessage += "Category: Relevant domain with clear but improvable problem decision";
+          } else if (marksNum >= 1) {
+            alertMessage += "Performance: Needs Improvement (1-6 marks)\n";
+            alertMessage += "Category: Irrelevant domain or ambiguous problem definition";
+          } else {
+            alertMessage += "Performance: No marks awarded";
+          }
+        }
+
+        // Show alert with all details
+        alert(alertMessage);
+        
+        // Optional: Reset form after showing alert
+        // form.reset();
+      });
+    });
+  </script>
+</body>
+</html>

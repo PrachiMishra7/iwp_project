@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Submission</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('christbg.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .overlay {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* centered vertically */
+      backdrop-filter: blur(12px);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      font-family: 'Georgia', serif;
+      color: black;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .phase {
+      background-color: rgba(30, 50, 60, 0.9);
+      border-radius: 10px;
+      padding: 20px;
+      width: 220px;
+      min-height: 250px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .dropdown-btn {
+      background-color: #e0e0e0;
+      color: black;
+      font-weight: bold;
+      padding: 10px;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .review-list {
+      list-style-type: none;
+      padding-left: 10px;
+      margin-top: 15px;
+      display: none;
+    }
+
+    .review-list li {
+      margin: 10px 0;
+    }
+
+    .review-list li a {
+      text-decoration: none;
+      color: white;
+      font-style: italic;
+      font-size: 15px;
+    }
+
+    .review-list li a:hover {
+      text-decoration: underline;
+    }
+
+    .arrow {
+      display: inline-block;
+      margin-right: 8px;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Submission</h1>
+
+    <div class="container">
+      <!-- Phase 1 -->
+      <div class="phase">
+        <button class="dropdown-btn" onclick="toggleMenu('phase1')">PHASE 1 ▼</button>
+        <ul class="review-list" id="phase1">
+          <li><a href="review0.html"><span class="arrow">▶</span>Review 0</a></li>
+          <li><a href="review1.html"><span class="arrow">▶</span>Review 1</a></li>
+          <li><a href="review2.html"><span class="arrow">▶</span>Review 2</a></li>
+        </ul>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase">
+        <button class="dropdown-btn" onclick="toggleMenu('phase2')">PHASE 2 ▼</button>
+        <ul class="review-list" id="phase2">
+          <li><a href="review0.html"><span class="arrow">▶</span>Review 0</a></li>
+          <li><a href="review1.html"><span class="arrow">▶</span>Review 1</a></li>
+          <li><a href="review2.html"><span class="arrow">▶</span>Review 2</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu(id) {
+      const list = document.getElementById(id);
+      list.style.display = list.style.display === "block" ? "none" : "block";
+    }
+  </script>
+</body>
+</html>

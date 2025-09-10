@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles2.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon" class="user-icon">
+      <h2>Dashboard Menu</h2>
+
+      <form>
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Enter Name" />
+        <label for="regno">Reg No.</label>
+        <input type="text" id="regno" placeholder="Enter Reg No" />
+        <button class="search-btn" type="submit">Search</button>
+      </form>
+
+      <div class="sidebar-links-box">
+        <ul>
+          <li><a href="submission.html" class="sidebar-link"><i class="fas fa-upload"></i> Project Submission</a></li>
+          <li><a href="phases.html" class="sidebar-link"><i class="fas fa-check-circle"></i> Project Evaluation</a></li>
+          <li><a href="final(phase1).html" class="sidebar-link"><i class="fas fa-chart-line"></i> Progress</a></li>
+          <li><a href="index.html" class="sidebar-link"><i class="fas fa-arrow-left"></i> Back to Login</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="main">
+      <h1>DASHBOARD</h1>
+      <div class="charts-grid">
+        <div class="chart-box">
+          <h3>PHASE 1</h3>
+          <canvas id="phase1Chart"></canvas>
+        </div>
+        <div class="chart-box">
+          <h3>PHASE 2</h3>
+          <canvas id="phase2Chart"></canvas>
+        </div>
+        <div class="chart-box">
+          <h3>BAR COMPARISON</h3>
+          <canvas id="barChart"></canvas>
+        </div>
+        <div class="chart-box">
+          <h3>PENDING ISSUES</h3>
+          <canvas id="lineChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const interactiveOptions = {
+      responsive: true,
+      plugins: {
+        legend: {
+          labels: {
+            color: 'black',
+            font: { size: 14, weight: 'bold' }
+          }
+        }
+      }
+    };
+
+    new Chart(document.getElementById('phase1Chart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Review 0', 'Review 1', 'Review 2'],
+        datasets: [{ data: [10, 20, 40], backgroundColor: ['#8e44ad', '#e74c3c', '#1abc9c'] }]
+      },
+      options: interactiveOptions
+    });
+
+    new Chart(document.getElementById('phase2Chart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Review 0', 'Review 1', 'Review 2'],
+        datasets: [{ data: [15, 25, 46], backgroundColor: ['#8e44ad', '#e74c3c', '#1abc9c'] }]
+      },
+      options: interactiveOptions
+    });
+
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Review 0', 'Review 1', 'Review 2'],
+        datasets: [
+          { label: 'Phase 1', data: [90, 50, 60], backgroundColor: '#e74c3c' },
+          { label: 'Phase 2', data: [95, 95, 80], backgroundColor: '#3498db' }
+        ]
+      },
+      options: {
+        ...interactiveOptions,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    new Chart(document.getElementById('lineChart'), {
+      type: 'line',
+      data: {
+        labels: ['Phase 1 Pending', 'Phase 2 Pending'],
+        datasets: [
+          { label: 'Review 0', data: [1, 2], borderColor: '#8e44ad', tension: 0.3 },
+          { label: 'Review 1', data: [4, 5], borderColor: '#e67e22', tension: 0.3 },
+          { label: 'Review 2', data: [6, 5], borderColor: '#16a085', tension: 0.3 }
+        ]
+      },
+      options: interactiveOptions
+    });
+  </script>
+</body>
+</html>
+
+

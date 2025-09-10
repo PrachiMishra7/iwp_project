@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phases Submission</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: url('christbg.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h2 {
+      text-align: center;
+      color: black;
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+    .phases-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 100px;
+      margin-bottom: 40px;
+    }
+    .phase-box { display: flex; flex-direction: column; align-items: center; }
+    .phase-btn {
+      background: rgba(98, 0, 128, 0.85);
+      color: white;
+      padding: 14px 30px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 12px;
+      font-size: 20px;
+      font-weight: bold;
+      width: 170px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+    .review-btn {
+      background: rgba(206, 153, 221, 0.75);
+      color: white;
+      padding: 10px 20px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 17px;
+      font-style: italic;
+      width: 170px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    .review-btn:hover { background: rgba(255,255,255,0.85); color: #4b0082; }
+    .submit-btn {
+      padding: 12px 35px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.9);
+      color: #4b0082;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      cursor: pointer;
+    }
+    .submit-btn:hover { background: #f0f0f0; }
+    @media (max-width: 768px) {
+      .phases-wrapper { flex-direction: column; gap: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h2>Phases<br><span style="font-size:18px;">(Phase 1 and Phase 2)</span></h2>
+    <div class="phases-wrapper">
+      <div class="phase-box">
+        <div class="phase-btn">Phase 1</div>
+        <a href="review0(eva).html" class="review-btn">Review 0</a>
+        <a href="review1(ev).html" class="review-btn">Review 1</a>
+        <a href="review2(eva).html" class="review-btn">Review 2</a>
+      </div>
+      <div class="phase-box">
+        <div class="phase-btn">Phase 2</div>
+        <a href="review0(eva).html" class="review-btn">Review 0</a>
+        <a href="review1(ev).html" class="review-btn">Review 1</a>
+        <a href="review2(eva).html" class="review-btn">Review 2</a>
+      </div>
+    </div>
+    <button class="submit-btn" id="submitBtn">Submit</button>
+  </div>
+
+  <script>
+    document.getElementById("submitBtn").addEventListener("click", async () => {
+      try {
+        // Example: sending dummy data (replace with actual form values if needed)
+        const res = await fetch("/api/review0_eval", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            faculty_id: "F001",
+            student_id: "2360357",
+            marks: 18,
+            comments: "Good work"
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          alert("✅ Marks got updated successfully!");
+        } else {
+          alert("❌ Failed: " + (data.error || "Unknown error"));
+        }
+      } catch (err) {
+        alert("⚠️ Network error, please try again.");
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

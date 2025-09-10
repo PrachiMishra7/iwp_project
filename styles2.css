@@ -1,0 +1,139 @@
+/* General body style */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  background-image: url('christbg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: rgba(255, 255, 255, 0.7);
+  background-blend-mode: overlay;
+}
+
+/* Container layout */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar design */
+.sidebar {
+  width: 23%; /* Slightly less than 1/4th */
+  padding: 25px;
+  background: rgba(0, 105, 140, 0.95); /* Deep blue */
+  color: white;
+}
+
+.sidebar img {
+  width: 70px;
+  display: block;
+  margin: 0 auto 15px;
+}
+
+.sidebar h2 {
+  font-size: 1.8rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.sidebar label {
+  font-size: 1.25rem;
+  display: block;
+  margin-top: 12px;
+}
+
+.sidebar input,
+.search-btn {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: none;
+}
+
+.search-btn {
+  background-color: #007B8F;
+  color: white;
+  cursor: pointer;
+}
+
+/* Sidebar Links Box */
+.sidebar-links-box {
+  margin-top: 25px;
+  padding: 15px;
+  background-color: rgba(173, 216, 230, 0.2);
+  border-radius: 10px;
+}
+
+.sidebar-links-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-links-box li {
+  margin: 15px 0;
+}
+
+.sidebar-link {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.sidebar-link i {
+  font-size: 1.3rem;
+}
+
+.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Main dashboard area */
+.main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.main h1 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #002233;
+}
+
+/* Chart grid layout */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.chart-box {
+  background: rgba(255, 255, 255, 0.92);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.chart-box h3 {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Canvas size */
+canvas {
+  max-height: 230px !important;
+  max-width: 100% !important;
+}
+
+

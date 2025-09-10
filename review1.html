@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Submission Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('christbg.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+    .container {
+      background: rgba(255,255,255,0.8);
+      padding: 20px;
+      margin: 20px auto;
+      width: 70%;
+      border-radius: 10px;
+    }
+    label { 
+      font-weight: bold; 
+      display: block; 
+      margin-top: 10px; 
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    .submit-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #c19a6b;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background: #a0845a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Project Submission Portal</h2>
+    <form id="review1Form" enctype="multipart/form-data">
+      <label>Student ID:</label>
+      <input type="text" name="student_id" required>
+
+      <label>Student Name:</label>
+      <input type="text" name="student_name" required>
+
+      <label>Class:</label>
+      <input type="text" name="class_name" required>
+
+      <h3>Currently on: Review 0</h3>
+
+      <label>Objective:</label>
+      <textarea name="objective"></textarea>
+
+      <label>Implementation:</label>
+      <textarea name="implementation"></textarea>
+
+      <label>Tools used:</label>
+      <textarea name="tools"></textarea>
+
+      <label>Presentation Status:</label>
+      <input type="text" name="presentation_status">
+
+      <label>Completion Status:</label>
+      <input type="text" name="completion_status">
+
+      <label>Final Status:</label>
+      <input type="text" name="final_status">
+
+      <label>Upload document below:</label>
+      <input type="file" name="file">
+
+      <button type="submit" class="submit-btn">SUBMIT</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('review0Form').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent default form submission
+      
+      // Get form data
+      const formData = new FormData(this);
+      
+      // Create details message
+      let alertMessage = "Details Updated Successfully!\n\n";
+      alertMessage += "Student ID: " + (formData.get('student_id') || 'Not provided') + "\n";
+      alertMessage += "Student Name: " + (formData.get('student_name') || 'Not provided') + "\n";
+      alertMessage += "Class: " + (formData.get('class_name') || 'Not provided') + "\n";
+      alertMessage += "Objective: " + (formData.get('objective') || 'Not provided') + "\n";
+      alertMessage += "Implementation: " + (formData.get('implementation') || 'Not provided') + "\n";
+      alertMessage += "Tools used: " + (formData.get('tools') || 'Not provided') + "\n";
+      alertMessage += "Presentation Status: " + (formData.get('presentation_status') || 'Not provided') + "\n";
+      alertMessage += "Completion Status: " + (formData.get('completion_status') || 'Not provided') + "\n";
+      alertMessage += "Final Status: " + (formData.get('final_status') || 'Not provided') + "\n";
+      
+      const file = formData.get('file');
+      if (file && file.name) {
+        alertMessage += "File: " + file.name;
+      } else {
+        alertMessage += "File: No file selected";
+      }
+      
+      // Show alert with details
+      alert(alertMessage);
+      
+      // Optional: Reset form after showing alert
+      // this.reset();
+    });
+  </script>
+</body>
+</html>

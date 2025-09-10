@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project Evaluation (PHASE-1)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Times New Roman', serif;
+      margin: 0;
+      padding: 10px 30px;
+      color: #000;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: url('christbg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(255, 255, 255, 0.6);
+      z-index: -1;
+    }
+
+    h1 {
+      text-align: center;
+      color: #7b1fa2;
+      margin: 5px 0 15px;
+      font-size: 28px;
+    }
+
+    .top-section {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+
+    .half-width {
+      flex: 1;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #7b1fa2;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 10px;
+    }
+
+    th {
+      border: 2px solid black;
+      padding: 10px;
+      text-align: center;
+      font-size: 15px;
+      background-color: #977298;
+      color: white;
+    }
+
+    td {
+      border: 2px solid black;
+      padding: 20px 10px;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    input[type="number"] {
+      width: 90%;
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 6px;
+      border: 1px solid #555;
+      background-color: #e6ccff;
+    }
+
+    .bottom-section {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .graph-section {
+      flex: 1;
+      text-align: center;
+    }
+
+    .graph-section canvas {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .phase-label {
+      margin-top: 5px;
+      color: #7b1fa2;
+      font-weight: bold;
+      font-size: 22px;
+    }
+
+    .review2-section {
+      flex: 2;
+    }
+
+    .result-box {
+      display: flex;
+      justify-content: space-between;
+      font-size: 17px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .result-box div {
+      background: #e6ccff;
+      padding: 10px 20px;
+      border: 2px solid #555;
+      border-radius: 10px;
+      width: 48%;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 768px) {
+      .top-section,
+      .bottom-section,
+      .result-box {
+        flex-direction: column;
+      }
+
+      .result-box div {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Project Evaluation (PHASE-1)</h1>
+
+  <div class="top-section">
+    <div class="half-width">
+      <div class="section-title">Review 0 (20 marks)</div>
+      <table>
+        <tr><th>Criteria</th><th>Marks Awarded</th></tr>
+        <tr>
+          <td>Domain and Problem Identification (20)</td>
+          <td><input type="number" max="20" min="0" class="marks" id="r0" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="half-width">
+      <div class="section-title">Review 1 (20 marks)</div>
+      <table>
+        <tr><th>Criteria</th><th>Marks Awarded</th></tr>
+        <tr>
+          <td>Literature / Background Study (20)</td>
+          <td><input type="number" max="20" min="0" class="marks" id="r1" /></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="bottom-section">
+    <div class="review2-section">
+      <div class="section-title">Review 2 (60 marks)</div>
+      <table>
+        <tr><th>Criteria</th><th>Marks Awarded</th></tr>
+        <tr>
+          <td>Design Methodology (15)</td>
+          <td><input type="number" max="15" min="0" class="marks r2" /></td>
+        </tr>
+        <tr>
+          <td>Implementation (15)</td>
+          <td><input type="number" max="15" min="0" class="marks r2" /></td>
+        </tr>
+        <tr>
+          <td>Presentation (15)</td>
+          <td><input type="number" max="15" min="0" class="marks r2" /></td>
+        </tr>
+        <tr>
+          <td>Report (15)</td>
+          <td><input type="number" max="15" min="0" class="marks r2" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="graph-section">
+      <div class="section-title" style="color: brown;">Graph of Review Scores</div>
+      <canvas id="scoreChart"></canvas>
+      <div class="phase-label">PHASE-1</div>
+    </div>
+  </div>
+
+  <div class="result-box">
+    <div>Total Marks Obtained:<br><span id="totalMarks">--</span></div>
+    <div>Percentage Obtained:<br><span id="percentage">--</span>%</div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('scoreChart').getContext('2d');
+
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Review 0', 'Review 1', 'Review 2'],
+        datasets: [{
+          label: 'Marks per Review',
+          data: [0, 0, 0],
+          borderColor: 'green',
+          backgroundColor: 'rgba(0,128,0,0.2)',
+          tension: 0.4,
+          fill: true,
+          pointRadius: 6,
+          pointHoverRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            suggestedMax: 60
+          }
+        }
+      }
+    });
+
+    function updateChartAndStats() {
+      const r0 = +document.getElementById('r0').value || 0;
+      const r1 = +document.getElementById('r1').value || 0;
+      const r2Inputs = document.querySelectorAll('.r2');
+      const r2 = [...r2Inputs].reduce((sum, inp) => sum + (+inp.value || 0), 0);
+
+      const total = r0 + r1 + r2;
+      const percent = ((total / 100) * 100).toFixed(2);
+
+      chart.data.datasets[0].data = [r0, r1, r2];
+      chart.update();
+
+      document.getElementById('totalMarks').innerText = total;
+      document.getElementById('percentage').innerText = percent;
+    }
+
+    document.querySelectorAll('.marks').forEach(input => {
+      input.addEventListener('input', updateChartAndStats);
+    });
+  </script>
+
+</body>
+</html>
